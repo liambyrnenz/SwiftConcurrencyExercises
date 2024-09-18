@@ -11,7 +11,9 @@ import SwiftUI
 struct SwiftConcurrencyExercisesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(
+                viewModel: ContentViewModelImpl()
+            )
         }
     }
 }

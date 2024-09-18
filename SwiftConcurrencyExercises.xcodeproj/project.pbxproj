@@ -11,6 +11,7 @@
 		0C6FE46E2C9B5939007BB386 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6FE46D2C9B5939007BB386 /* ContentView.swift */; };
 		0C6FE4702C9B593A007BB386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C6FE46F2C9B593A007BB386 /* Assets.xcassets */; };
 		0C6FE4732C9B593A007BB386 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C6FE4722C9B593A007BB386 /* Preview Assets.xcassets */; };
+		0C6FE47A2C9B5B4B007BB386 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6FE4792C9B5B4B007BB386 /* ContentViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		0C6FE46D2C9B5939007BB386 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0C6FE46F2C9B593A007BB386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C6FE4722C9B593A007BB386 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0C6FE4792C9B5B4B007BB386 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				0C6FE46B2C9B5939007BB386 /* SwiftConcurrencyExercisesApp.swift */,
 				0C6FE46D2C9B5939007BB386 /* ContentView.swift */,
+				0C6FE4792C9B5B4B007BB386 /* ContentViewModel.swift */,
 				0C6FE46F2C9B593A007BB386 /* Assets.xcassets */,
 				0C6FE4712C9B593A007BB386 /* Preview Content */,
 			);
@@ -139,6 +142,7 @@
 			files = (
 				0C6FE46E2C9B5939007BB386 /* ContentView.swift in Sources */,
 				0C6FE46C2C9B5939007BB386 /* SwiftConcurrencyExercisesApp.swift in Sources */,
+				0C6FE47A2C9B5B4B007BB386 /* ContentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

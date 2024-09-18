@@ -8,17 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    let viewModel: ContentViewModel
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("Start Concurrent Work!") {
+                viewModel.start()
+            }
         }
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(
+        viewModel: ContentViewModelMock()
+    )
 }
