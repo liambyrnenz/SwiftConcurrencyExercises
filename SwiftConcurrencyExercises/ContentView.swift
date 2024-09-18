@@ -13,7 +13,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Button("Start Concurrent Work!") {
-                viewModel.start()
+                Task { @MainActor in
+                    await viewModel.start()
+                }
             }
         }
         .padding()
