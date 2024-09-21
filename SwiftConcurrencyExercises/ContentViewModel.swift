@@ -73,6 +73,25 @@ class ContentViewModelImpl: ContentViewModel {
         await print(adoptionManager.adoptionRequestCounts)
     }
     
+    @MainActor
+    private func scenarioB() async {
+        // By adding tasks to wait on before updating the manager's underlying storage, we open up the manager
+        // actor to exhibit its non-atomicity property. When the manager reaches the suspension point for the
+        // delay within one of the tasks below, the other will be attempted to be progressed until the delay
+        // ends.
+        await adoptionManager.setInduceRandomDelay()
+        await withDiscardingTaskGroup { group in
+            group.addTask { @MainActor in
+                await self.wellington.submitAdoptionRequest(forCatWithID: 0)
+            }
+            
+            group.addTask { @MainActor in
+                await self.lowerHutt.submitAdoptionRequest(forCatWithID: 3)
+            }
+        }
+        await print(adoptionManager.adoptionRequestCounts)
+    }
+    
 }
 
 // MARK: - AdoptionManager
@@ -85,14 +104,25 @@ struct Cat: Hashable {
 actor AdoptionManager {
     
     private(set) var adoptionRequestCounts: [Cat: Int] = [:]
+    private var induceRandomDelay: Bool = false
     
-    func submitAdoptionRequest(for cat: Cat) {
+    func setInduceRandomDelay() {
+        induceRandomDelay = true
+    }
+    
+    func submitAdoptionRequest(for cat: Cat) async {
         print("AdoptionManager received submit adoption request for \(cat)")
+        if induceRandomDelay {
+            await Task.randomDelay()
+        }
         adoptionRequestCounts[cat, default: 0] += 1
     }
     
-    func removeAdoptionRequest(for cat: Cat) {
+    func removeAdoptionRequest(for cat: Cat) async {
         print("AdoptionManager received remove adoption request for \(cat)")
+        if induceRandomDelay {
+            await Task.randomDelay()
+        }
         adoptionRequestCounts[cat]? -= 1
         if adoptionRequestCounts[cat] == 0 {
             adoptionRequestCounts[cat] = nil
