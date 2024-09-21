@@ -56,6 +56,21 @@ class ContentViewModelImpl: ContentViewModel {
     
     @MainActor
     private func scenarioA() async {
+        // This could also be done as two unstructured `Task`s, but doing it like this allows us
+        // to be aware when all tasks have been completed and run code after (e.g. a confirmation log.)
+        await withDiscardingTaskGroup { group in
+            group.addTask { @MainActor in
+                await self.wellington.submitAdoptionRequest(forCatWithID: 0)
+                await self.wellington.submitAdoptionRequest(forCatWithID: 1)
+                await self.wellington.removeAdoptionRequest(forCatWithID: 0)
+            }
+            
+            group.addTask { @MainActor in
+                await self.lowerHutt.submitAdoptionRequest(forCatWithID: 3)
+                await self.lowerHutt.submitAdoptionRequest(forCatWithID: 4)
+            }
+        }
+        await print(adoptionManager.adoptionRequestCounts)
     }
     
 }
