@@ -12,6 +12,12 @@
 		0C6FE4702C9B593A007BB386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C6FE46F2C9B593A007BB386 /* Assets.xcassets */; };
 		0C6FE4732C9B593A007BB386 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C6FE4722C9B593A007BB386 /* Preview Assets.xcassets */; };
 		0C6FE47A2C9B5B4B007BB386 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6FE4792C9B5B4B007BB386 /* ContentViewModel.swift */; };
+		0C7C984C2CA4ABD300B18A9D /* AdoptionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C984B2CA4ABD300B18A9D /* AdoptionContext.swift */; };
+		0C7C984E2CA4ABE700B18A9D /* AdoptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C984D2CA4ABE700B18A9D /* AdoptionManager.swift */; };
+		0C7C98502CA4ABF400B18A9D /* AdoptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C984F2CA4ABF400B18A9D /* AdoptionService.swift */; };
+		0C7C98522CA4AC0600B18A9D /* AdoptionOutlet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C98512CA4AC0600B18A9D /* AdoptionOutlet.swift */; };
+		0C7C98552CA4AC2700B18A9D /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C98542CA4AC2700B18A9D /* Cat.swift */; };
+		0C7C98582CA4ACC500B18A9D /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7C98572CA4ACC500B18A9D /* Task+Extensions.swift */; };
 		0C91BBDA2C9EF6FC00677398 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C91BBD92C9EF6FC00677398 /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -22,6 +28,12 @@
 		0C6FE46F2C9B593A007BB386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C6FE4722C9B593A007BB386 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0C6FE4792C9B5B4B007BB386 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		0C7C984B2CA4ABD300B18A9D /* AdoptionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdoptionContext.swift; sourceTree = "<group>"; };
+		0C7C984D2CA4ABE700B18A9D /* AdoptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdoptionManager.swift; sourceTree = "<group>"; };
+		0C7C984F2CA4ABF400B18A9D /* AdoptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdoptionService.swift; sourceTree = "<group>"; };
+		0C7C98512CA4AC0600B18A9D /* AdoptionOutlet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdoptionOutlet.swift; sourceTree = "<group>"; };
+		0C7C98542CA4AC2700B18A9D /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
+		0C7C98572CA4ACC500B18A9D /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
 		0C91BBD92C9EF6FC00677398 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,10 +68,12 @@
 		0C6FE46A2C9B5939007BB386 /* SwiftConcurrencyExercises */ = {
 			isa = PBXGroup;
 			children = (
-				0C6FE46B2C9B5939007BB386 /* SwiftConcurrencyExercisesApp.swift */,
+				0C7C984A2CA4ABC500B18A9D /* Adoption */,
+				0C7C98562CA4ACB700B18A9D /* Extensions */,
 				0C6FE46D2C9B5939007BB386 /* ContentView.swift */,
 				0C6FE4792C9B5B4B007BB386 /* ContentViewModel.swift */,
 				0C6FE46F2C9B593A007BB386 /* Assets.xcassets */,
+				0C6FE46B2C9B5939007BB386 /* SwiftConcurrencyExercisesApp.swift */,
 				0C6FE4712C9B593A007BB386 /* Preview Content */,
 			);
 			path = SwiftConcurrencyExercises;
@@ -71,6 +85,34 @@
 				0C6FE4722C9B593A007BB386 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0C7C984A2CA4ABC500B18A9D /* Adoption */ = {
+			isa = PBXGroup;
+			children = (
+				0C7C98532CA4AC2000B18A9D /* Models */,
+				0C7C984B2CA4ABD300B18A9D /* AdoptionContext.swift */,
+				0C7C984D2CA4ABE700B18A9D /* AdoptionManager.swift */,
+				0C7C984F2CA4ABF400B18A9D /* AdoptionService.swift */,
+				0C7C98512CA4AC0600B18A9D /* AdoptionOutlet.swift */,
+			);
+			path = Adoption;
+			sourceTree = "<group>";
+		};
+		0C7C98532CA4AC2000B18A9D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0C7C98542CA4AC2700B18A9D /* Cat.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0C7C98562CA4ACB700B18A9D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0C7C98572CA4ACC500B18A9D /* Task+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,8 +187,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C6FE46E2C9B5939007BB386 /* ContentView.swift in Sources */,
+				0C7C98582CA4ACC500B18A9D /* Task+Extensions.swift in Sources */,
 				0C6FE46C2C9B5939007BB386 /* SwiftConcurrencyExercisesApp.swift in Sources */,
 				0C6FE47A2C9B5B4B007BB386 /* ContentViewModel.swift in Sources */,
+				0C7C984E2CA4ABE700B18A9D /* AdoptionManager.swift in Sources */,
+				0C7C98552CA4AC2700B18A9D /* Cat.swift in Sources */,
+				0C7C984C2CA4ABD300B18A9D /* AdoptionContext.swift in Sources */,
+				0C7C98522CA4AC0600B18A9D /* AdoptionOutlet.swift in Sources */,
+				0C7C98502CA4ABF400B18A9D /* AdoptionService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
