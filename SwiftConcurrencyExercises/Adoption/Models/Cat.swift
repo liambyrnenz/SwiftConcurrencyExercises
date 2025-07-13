@@ -5,7 +5,7 @@
 //  Created by Liam on 25/09/2024.
 //
 
-struct Cat: Hashable {
+struct Cat: Hashable, Sendable {
     let id: Int
     let name: String
 }

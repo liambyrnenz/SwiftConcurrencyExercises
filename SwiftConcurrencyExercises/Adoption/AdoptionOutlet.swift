@@ -5,11 +5,9 @@
 //  Created by Liam on 25/09/2024.
 //
 
-// This class marked as `@unchecked Sendable` is akin to a presenter implemented as a class in an
-// MVP/VIPER architecture, thus showing how `@unchecked Sendable` is a way such components can be
-// made to fit in an async/await context (albeit a bad one - ideally, some other way should be found
-// to make this Sendable.)
-class AdoptionOutlet: @unchecked Sendable {
+// This is implemented as an actor in order for outlets to participate in concurrent operations
+// safely (i.e. be Sendable) but also manage internal state.
+actor AdoptionOutlet {
 
     enum Identifier: Int {
         case wellington, lowerHutt
@@ -18,9 +16,9 @@ class AdoptionOutlet: @unchecked Sendable {
     private let identifier: Identifier
     private let adoptionManager: AdoptionManager
     private let adoptionService: AdoptionService
-    private(set) var cats: [Cat] = []
+    private var cats: [Cat] = []
 
-    required init(identifier: Identifier, adoptionManager: AdoptionManager, adoptionService: AdoptionService) {
+    init(identifier: Identifier, adoptionManager: AdoptionManager, adoptionService: AdoptionService) {
         self.identifier = identifier
         self.adoptionManager = adoptionManager
         self.adoptionService = adoptionService
