@@ -11,14 +11,19 @@ struct ContentView: View {
     let viewModel: ContentViewModel
 
     var body: some View {
-        VStack {
-            Button("Start Concurrent Work!") {
-                Task { @MainActor in
-                    await viewModel.start()
-                }
-            }
+        VStack(spacing: 32) {
+            scenarioButton(.scenarioA)
+            scenarioButton(.scenarioB)
         }
         .padding()
+    }
+
+    private func scenarioButton(_ scenario: AdoptionScenario) -> some View {
+        Button(scenario.description) {
+            Task {
+                await viewModel.start(scenario: scenario)
+            }
+        }
     }
 }
 

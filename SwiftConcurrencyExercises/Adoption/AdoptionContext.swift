@@ -5,6 +5,20 @@
 //  Created by Liam on 25/09/2024.
 //
 
+enum AdoptionScenario: CustomStringConvertible {
+    case scenarioA
+    case scenarioB
+
+    var description: String {
+        switch self {
+        case .scenarioA:
+            "Scenario A"
+        case .scenarioB:
+            "Scenario B"
+        }
+    }
+}
+
 /// A class managing the cat adoption exercise context, hosting component instances and scenarios.
 struct AdoptionContext: Sendable {
 
@@ -14,12 +28,16 @@ struct AdoptionContext: Sendable {
     private var wellington: AdoptionOutlet!
     private var lowerHutt: AdoptionOutlet!
 
-    init() {
+    private let scenario: AdoptionScenario
+
+    init(scenario: AdoptionScenario) {
         adoptionManager = AdoptionManager()
         adoptionService = AdoptionService()
 
         wellington = AdoptionOutlet(identifier: .wellington, adoptionManager: adoptionManager, adoptionService: adoptionService)
         lowerHutt = AdoptionOutlet(identifier: .lowerHutt, adoptionManager: adoptionManager, adoptionService: adoptionService)
+
+        self.scenario = scenario
     }
 
     @MainActor
@@ -35,8 +53,12 @@ struct AdoptionContext: Sendable {
         }
         print("All outlets opened\n")
 
-        // ===== Change scenario here =====
-        await scenarioA()
+        switch scenario {
+        case .scenarioA:
+            await scenarioA()
+        case .scenarioB:
+            await scenarioB()
+        }
     }
 
     /// In this scenario, two sequences of adoption request submissions and removals are started at
