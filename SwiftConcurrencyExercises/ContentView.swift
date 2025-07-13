@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     let viewModel: ContentViewModel
-    
+
     var body: some View {
         VStack {
             Button("Start Concurrent Work!") {

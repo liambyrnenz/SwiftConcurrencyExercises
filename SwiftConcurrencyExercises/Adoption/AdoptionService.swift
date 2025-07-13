@@ -5,8 +5,8 @@
 //  Created by Liam on 25/09/2024.
 //
 
-class AdoptionService {
-    
+struct AdoptionService: Sendable {
+
     func fetchCats(forOutletWithIdentifier identifier: AdoptionOutlet.Identifier) async -> [Cat] {
         await Task {
             await Task.randomDelay()
@@ -26,5 +26,5 @@ class AdoptionService {
             }
         }.value
     }
-    
+
 }

@@ -6,10 +6,10 @@
 //
 
 extension Task where Success == Never, Failure == Never {
-    
+
     static func randomDelay() async {
         let delay: Int = (0...2).randomElement()!
         try! await Task.sleep(for: .seconds(delay))
     }
-    
+
 }
