@@ -14,6 +14,7 @@ struct ContentView: View {
         VStack(spacing: 32) {
             scenarioButton(.scenarioA)
             scenarioButton(.scenarioB)
+            scenarioButton(.scenarioC)
         }
         .padding()
     }

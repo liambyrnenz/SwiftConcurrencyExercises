@@ -25,7 +25,11 @@ struct ContentViewModelMock: ContentViewModel {
 class ContentViewModelImpl: ContentViewModel {
 
     func start(scenario: AdoptionScenario) async {
-        await AdoptionContext(scenario: scenario).start()
+        if scenario.isAsync {
+            await AdoptionContext(scenario: scenario).start()
+        } else {
+            AdoptionContextNonAsync(scenario: scenario).start()
+        }
     }
 
 }

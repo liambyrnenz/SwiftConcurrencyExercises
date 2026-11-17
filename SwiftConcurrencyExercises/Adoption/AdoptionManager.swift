@@ -5,6 +5,8 @@
 //  Created by Liam on 25/09/2024.
 //
 
+import Dispatch
+
 actor AdoptionManager {
 
     private(set) var adoptionRequestCounts: [Cat: Int] = [:]
@@ -32,6 +34,31 @@ actor AdoptionManager {
         adoptionRequestCounts[cat]? -= 1
         if adoptionRequestCounts[cat] == 0 {
             adoptionRequestCounts[cat] = nil
+        }
+    }
+
+}
+
+class AdoptionManagerNonAsync {
+
+    private(set) var adoptionRequestCounts: [Cat: Int] = [:]
+
+    private let queue = DispatchQueue(label: "nz.liambyrne.AdoptionManagerNonAsyncQueue")
+
+    func submitAdoptionRequest(for cat: Cat) {
+        print("AdoptionManagerNonAsync received submit adoption request for \(cat)")
+        queue.sync {
+            adoptionRequestCounts[cat, default: 0] += 1
+        }
+    }
+
+    func removeAdoptionRequest(for cat: Cat) {
+        print("AdoptionManagerNonAsync received remove adoption request for \(cat)")
+        queue.sync {
+            adoptionRequestCounts[cat]? -= 1
+            if adoptionRequestCounts[cat] == 0 {
+                adoptionRequestCounts[cat] = nil
+            }
         }
     }
 

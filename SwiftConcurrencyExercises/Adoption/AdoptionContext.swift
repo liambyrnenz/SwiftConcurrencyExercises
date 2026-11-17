@@ -8,6 +8,7 @@
 enum AdoptionScenario: CustomStringConvertible {
     case scenarioA
     case scenarioB
+    case scenarioC
 
     var description: String {
         switch self {
@@ -15,6 +16,17 @@ enum AdoptionScenario: CustomStringConvertible {
             "Scenario A"
         case .scenarioB:
             "Scenario B"
+        case .scenarioC:
+            "Scenario C"
+        }
+    }
+
+    var isAsync: Bool {
+        switch self {
+        case .scenarioA, .scenarioB:
+            true
+        case .scenarioC:
+            false
         }
     }
 }
@@ -58,6 +70,8 @@ struct AdoptionContext: Sendable {
             await scenarioA()
         case .scenarioB:
             await scenarioB()
+        default:
+            fatalError("Incompatible scenario")
         }
     }
 

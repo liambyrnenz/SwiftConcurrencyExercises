@@ -48,3 +48,42 @@ actor AdoptionOutlet {
     }
 
 }
+
+class AdoptionOutletNonAsync {
+
+    private let identifier: AdoptionOutlet.Identifier
+    private let adoptionManager: AdoptionManagerNonAsync
+    private let adoptionService: AdoptionServiceNonAsync
+    private var cats: [Cat] = []
+
+    init(identifier: AdoptionOutlet.Identifier, adoptionManager: AdoptionManagerNonAsync, adoptionService: AdoptionServiceNonAsync) {
+        self.identifier = identifier
+        self.adoptionManager = adoptionManager
+        self.adoptionService = adoptionService
+    }
+
+    func open() {
+        cats = adoptionService.fetchCats(forOutletWithIdentifier: identifier)
+        print("Outlet opened with ID: \(identifier)")
+    }
+
+    func submitAdoptionRequest(forCatWithID id: Int) {
+        guard let cat = cats.first(where: { $0.id == id }) else {
+            return
+        }
+        print("Start: Adoption request submitted for \(cat) from outlet with ID: \(identifier)")
+        adoptionManager.submitAdoptionRequest(for: cat)
+        print("End: Adoption request submitted for \(cat) from outlet with ID: \(identifier)\n")
+    }
+
+    func removeAdoptionRequest(forCatWithID id: Int) {
+        guard let cat = cats.first(where: { $0.id == id }) else {
+            return
+        }
+        print("Start: Adoption request removed for \(cat) from outlet with ID: \(identifier)")
+        adoptionManager.removeAdoptionRequest(for: cat)
+        print("End: Adoption request removed for \(cat) from outlet with ID: \(identifier)\n")
+    }
+
+
+}
