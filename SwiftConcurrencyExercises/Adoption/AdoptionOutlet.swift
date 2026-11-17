@@ -24,27 +24,36 @@ actor AdoptionOutlet {
         self.adoptionService = adoptionService
     }
 
-    func open() async {
+    func open() async -> [ContextOutput.Stage] {
         cats = await adoptionService.fetchCats(forOutletWithIdentifier: identifier)
         print("Outlet opened with ID: \(identifier)")
+        return [.outletOpened(identifier: identifier)]
     }
 
-    func submitAdoptionRequest(forCatWithID id: Int) async {
+    func submitAdoptionRequest(forCatWithID id: Int) async -> [ContextOutput.Stage] {
+        var stages: [ContextOutput.Stage] = []
         guard let cat = cats.first(where: { $0.id == id }) else {
-            return
+            return stages
         }
         print("Start: Adoption request submitted for \(cat) from outlet with ID: \(identifier)")
-        await adoptionManager.submitAdoptionRequest(for: cat)
+        stages.append(.submitAdoptionRequestStart(cat: cat, identifier: identifier))
+        stages.append(contentsOf: await adoptionManager.submitAdoptionRequest(for: cat))
         print("End: Adoption request submitted for \(cat) from outlet with ID: \(identifier)\n")
+        stages.append(.submitAdoptionRequestEnd(cat: cat, identifier: identifier))
+        return stages
     }
 
-    func removeAdoptionRequest(forCatWithID id: Int) async {
+    func removeAdoptionRequest(forCatWithID id: Int) async -> [ContextOutput.Stage] {
+        var stages: [ContextOutput.Stage] = []
         guard let cat = cats.first(where: { $0.id == id }) else {
-            return
+            return stages
         }
         print("Start: Adoption request removed for \(cat) from outlet with ID: \(identifier)")
-        await adoptionManager.removeAdoptionRequest(for: cat)
+        stages.append(.removeAdoptionRequestStart(cat: cat, identifier: identifier))
+        stages.append(contentsOf: await adoptionManager.removeAdoptionRequest(for: cat))
         print("End: Adoption request removed for \(cat) from outlet with ID: \(identifier)\n")
+        stages.append(.removeAdoptionRequestEnd(cat: cat, identifier: identifier))
+        return stages
     }
 
 }
@@ -62,27 +71,36 @@ class AdoptionOutletNonAsync {
         self.adoptionService = adoptionService
     }
 
-    func open() {
+    func open() -> [ContextOutput.Stage] {
         cats = adoptionService.fetchCats(forOutletWithIdentifier: identifier)
         print("Outlet opened with ID: \(identifier)")
+        return [.outletOpened(identifier: identifier)]
     }
 
-    func submitAdoptionRequest(forCatWithID id: Int) {
+    func submitAdoptionRequest(forCatWithID id: Int) -> [ContextOutput.Stage] {
+        var stages: [ContextOutput.Stage] = []
         guard let cat = cats.first(where: { $0.id == id }) else {
-            return
+            return stages
         }
         print("Start: Adoption request submitted for \(cat) from outlet with ID: \(identifier)")
-        adoptionManager.submitAdoptionRequest(for: cat)
+        stages.append(.submitAdoptionRequestStart(cat: cat, identifier: identifier))
+        stages.append(contentsOf: adoptionManager.submitAdoptionRequest(for: cat))
         print("End: Adoption request submitted for \(cat) from outlet with ID: \(identifier)\n")
+        stages.append(.submitAdoptionRequestEnd(cat: cat, identifier: identifier))
+        return stages
     }
 
-    func removeAdoptionRequest(forCatWithID id: Int) {
+    func removeAdoptionRequest(forCatWithID id: Int) -> [ContextOutput.Stage] {
+        var stages: [ContextOutput.Stage] = []
         guard let cat = cats.first(where: { $0.id == id }) else {
-            return
+            return stages
         }
         print("Start: Adoption request removed for \(cat) from outlet with ID: \(identifier)")
-        adoptionManager.removeAdoptionRequest(for: cat)
+        stages.append(.removeAdoptionRequestStart(cat: cat, identifier: identifier))
+        stages.append(contentsOf: adoptionManager.removeAdoptionRequest(for: cat))
         print("End: Adoption request removed for \(cat) from outlet with ID: \(identifier)\n")
+        stages.append(.removeAdoptionRequestEnd(cat: cat, identifier: identifier))
+        return stages
     }
 
 

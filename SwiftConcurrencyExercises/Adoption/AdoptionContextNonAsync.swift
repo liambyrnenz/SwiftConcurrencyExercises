@@ -27,33 +27,37 @@ class AdoptionContextNonAsync {
         self.scenario = scenario
     }
 
-    func start() {
+    func run() async -> ContextOutput {
+        let output = ContextOutput()
+
         // Like in the modern async scenarios, two read operations are kicked off simultaneously here.
         // The manager used by the outlets manages concurrent access with a serial queue.
         DispatchQueue.global().async {
-            self.wellington.open()
+            output.add(stages: self.wellington.open())
         }
         DispatchQueue.global().async {
-            self.lowerHutt.open()
+            output.add(stages: self.lowerHutt.open())
         }
         print("All outlets opened\n")
 
         switch scenario {
         case .scenarioC:
-            scenarioC()
+            await scenarioC(output: output)
         default:
             fatalError("Incompatible scenario")
         }
+
+        return output
     }
 
     /// In this scenario, two adoption requests are started at the same time. The manager used by the outlets manages concurrent
     /// access with a serial queue. This should mean that the same order is achieved every time.
-    private func scenarioC() {
+    private func scenarioC(output: ContextOutput) async {
         DispatchQueue.global().async {
-            self.wellington.submitAdoptionRequest(forCatWithID: 0)
+            output.add(stages: self.wellington.submitAdoptionRequest(forCatWithID: 0))
         }
         DispatchQueue.global().async {
-            self.lowerHutt.submitAdoptionRequest(forCatWithID: 3)
+            output.add(stages: self.lowerHutt.submitAdoptionRequest(forCatWithID: 3))
         }
     }
 

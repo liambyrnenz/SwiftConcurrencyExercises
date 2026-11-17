@@ -22,7 +22,7 @@ struct ContentView: View {
     private func scenarioButton(_ scenario: AdoptionScenario) -> some View {
         Button(scenario.description) {
             Task {
-                await viewModel.start(scenario: scenario)
+                await viewModel.run(scenario: scenario)
             }
         }
     }

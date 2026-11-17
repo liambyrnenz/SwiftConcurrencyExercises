@@ -53,26 +53,34 @@ struct AdoptionContext: Sendable {
         self.scenario = scenario
     }
 
-    func start() async {
+    func run() async -> ContextOutput {
+        let output = ContextOutput()
+
         // Collect tasks to open each outlet (loading each one with results from a service)
         // such that the method continues after all outlets have opened.
         //
         // The task group inherits the isolation domain of the context, but the tasks spawned within
         // do not.
         await withDiscardingTaskGroup { group in
-            group.addTask { @Sendable in await self.wellington.open() }
-            group.addTask { @Sendable in await self.lowerHutt.open() }
+            group.addTask { @Sendable in
+                await output.add(stages: await self.wellington.open())
+            }
+            group.addTask { @Sendable in
+                await output.add(stages: await self.lowerHutt.open())
+            }
         }
         print("All outlets opened\n")
 
         switch scenario {
         case .scenarioA:
-            await scenarioA()
+            await scenarioA(output: output)
         case .scenarioB:
-            await scenarioB()
+            await scenarioB(output: output)
         default:
             fatalError("Incompatible scenario")
         }
+
+        return output
     }
 
     /// In this scenario, two sequences of adoption request submissions and removals are started at
@@ -82,19 +90,19 @@ struct AdoptionContext: Sendable {
     ///
     /// We expect to see that the logs will appear such that updates within the adoption
     /// manager are immediately followed by an indication of the update ending.
-    private func scenarioA() async {
+    private func scenarioA(output: ContextOutput) async {
         // This could also be done as two unstructured `Task`s, but doing it like this allows us
         // to be aware when all tasks have been completed and run code after (e.g. a confirmation log.)
         await withDiscardingTaskGroup { group in
             group.addTask { @Sendable in
-                await self.wellington.submitAdoptionRequest(forCatWithID: 0)
-                await self.wellington.submitAdoptionRequest(forCatWithID: 1)
-                await self.wellington.removeAdoptionRequest(forCatWithID: 0)
+                await output.add(stages: await self.wellington.submitAdoptionRequest(forCatWithID: 0))
+                await output.add(stages: await self.wellington.submitAdoptionRequest(forCatWithID: 1))
+                await output.add(stages: await self.wellington.removeAdoptionRequest(forCatWithID: 0))
             }
 
             group.addTask { @Sendable in
-                await self.lowerHutt.submitAdoptionRequest(forCatWithID: 3)
-                await self.lowerHutt.submitAdoptionRequest(forCatWithID: 4)
+                await output.add(stages: await self.lowerHutt.submitAdoptionRequest(forCatWithID: 3))
+                await output.add(stages: await self.lowerHutt.submitAdoptionRequest(forCatWithID: 4))
             }
         }
         await print(adoptionManager.adoptionRequestCounts)
@@ -105,7 +113,7 @@ struct AdoptionContext: Sendable {
     /// before processing each update, meaning it will try and process as much of the next update as
     /// possible, if one exists. This setting means we will likely see logs that show the manager itself
     /// stacking updates, instead of processing them as units like in scenario A.
-    private func scenarioB() async {
+    private func scenarioB(output: ContextOutput) async {
         // By adding tasks to wait on before updating the manager's underlying storage, we open up the manager
         // actor to exhibit its non-atomicity property. When the manager reaches the suspension point for the
         // delay within one of the tasks below, the other will be attempted to be progressed until the delay
@@ -113,11 +121,11 @@ struct AdoptionContext: Sendable {
         await adoptionManager.setInduceRandomDelay()
         await withDiscardingTaskGroup { group in
             group.addTask { @Sendable in
-                await self.wellington.submitAdoptionRequest(forCatWithID: 0)
+                await output.add(stages: await self.wellington.submitAdoptionRequest(forCatWithID: 0))
             }
 
             group.addTask { @Sendable in
-                await self.lowerHutt.submitAdoptionRequest(forCatWithID: 3)
+                await output.add(stages: await self.lowerHutt.submitAdoptionRequest(forCatWithID: 3))
             }
         }
         await print(adoptionManager.adoptionRequestCounts)

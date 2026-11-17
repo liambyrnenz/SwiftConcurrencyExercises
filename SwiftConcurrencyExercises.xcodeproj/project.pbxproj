@@ -10,17 +10,36 @@
 		0C91BBDA2C9EF6FC00677398 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C91BBD92C9EF6FC00677398 /* README.md */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0C8C7E0B30AC20390046DD96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C6FE4602C9B5939007BB386 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C6FE4672C9B5939007BB386;
+			remoteInfo = SwiftConcurrencyExercises;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0C6FE4682C9B5939007BB386 /* SwiftConcurrencyExercises.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftConcurrencyExercises.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C8C7E0730AC20390046DD96 /* SwiftConcurrencyExercisesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftConcurrencyExercisesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C91BBD92C9EF6FC00677398 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		0C8C7E0830AC20390046DD96 /* SwiftConcurrencyExercisesTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SwiftConcurrencyExercisesTests; sourceTree = "<group>"; };
 		0CCA05D32E239D5900541B56 /* SwiftConcurrencyExercises */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SwiftConcurrencyExercises; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0C6FE4652C9B5939007BB386 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C8C7E0430AC20390046DD96 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,6 +54,7 @@
 			children = (
 				0CCA05D32E239D5900541B56 /* SwiftConcurrencyExercises */,
 				0C91BBD92C9EF6FC00677398 /* README.md */,
+				0C8C7E0830AC20390046DD96 /* SwiftConcurrencyExercisesTests */,
 				0C6FE4692C9B5939007BB386 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				0C6FE4682C9B5939007BB386 /* SwiftConcurrencyExercises.app */,
+				0C8C7E0730AC20390046DD96 /* SwiftConcurrencyExercisesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +91,29 @@
 			productReference = 0C6FE4682C9B5939007BB386 /* SwiftConcurrencyExercises.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0C8C7E0630AC20390046DD96 /* SwiftConcurrencyExercisesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C8C7E0D30AC20390046DD96 /* Build configuration list for PBXNativeTarget "SwiftConcurrencyExercisesTests" */;
+			buildPhases = (
+				0C8C7E0330AC20390046DD96 /* Sources */,
+				0C8C7E0430AC20390046DD96 /* Frameworks */,
+				0C8C7E0530AC20390046DD96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0C8C7E0C30AC20390046DD96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0C8C7E0830AC20390046DD96 /* SwiftConcurrencyExercisesTests */,
+			);
+			name = SwiftConcurrencyExercisesTests;
+			packageProductDependencies = (
+			);
+			productName = SwiftConcurrencyExercisesTests;
+			productReference = 0C8C7E0730AC20390046DD96 /* SwiftConcurrencyExercisesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -77,11 +121,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 2720;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					0C6FE4672C9B5939007BB386 = {
 						CreatedOnToolsVersion = 15.3;
+					};
+					0C8C7E0630AC20390046DD96 = {
+						CreatedOnToolsVersion = 27.2;
+						TestTargetID = 0C6FE4672C9B5939007BB386;
 					};
 				};
 			};
@@ -99,6 +147,7 @@
 			projectRoot = "";
 			targets = (
 				0C6FE4672C9B5939007BB386 /* SwiftConcurrencyExercises */,
+				0C8C7E0630AC20390046DD96 /* SwiftConcurrencyExercisesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -112,6 +161,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0C8C7E0530AC20390046DD96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -122,7 +178,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0C8C7E0330AC20390046DD96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0C8C7E0C30AC20390046DD96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C6FE4672C9B5939007BB386 /* SwiftConcurrencyExercises */;
+			targetProxy = 0C8C7E0B30AC20390046DD96 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0C6FE4742C9B593A007BB386 /* Debug */ = {
@@ -302,6 +373,50 @@
 			};
 			name = Release;
 		};
+		0C8C7E0E30AC20390046DD96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5B8WY55GC6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nz.liambyrne.SwiftConcurrencyExercisesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftConcurrencyExercises.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftConcurrencyExercises";
+			};
+			name = Debug;
+		};
+		0C8C7E0F30AC20390046DD96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5B8WY55GC6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nz.liambyrne.SwiftConcurrencyExercisesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftConcurrencyExercises.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftConcurrencyExercises";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -319,6 +434,15 @@
 			buildConfigurations = (
 				0C6FE4772C9B593A007BB386 /* Debug */,
 				0C6FE4782C9B593A007BB386 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C8C7E0D30AC20390046DD96 /* Build configuration list for PBXNativeTarget "SwiftConcurrencyExercisesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C8C7E0E30AC20390046DD96 /* Debug */,
+				0C8C7E0F30AC20390046DD96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

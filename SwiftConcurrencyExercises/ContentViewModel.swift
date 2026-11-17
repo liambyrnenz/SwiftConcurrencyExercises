@@ -9,7 +9,7 @@
 
 @MainActor
 protocol ContentViewModel {
-    func start(scenario: AdoptionScenario) async
+    func run(scenario: AdoptionScenario) async -> ContextOutput
 }
 
 struct ContentViewModelMock: ContentViewModel {
@@ -19,16 +19,16 @@ struct ContentViewModelMock: ContentViewModel {
     // The protocol states that implementers must be main actor isolated, so this is inferred to be `@MainActor`.
     // Actor-isolated methods are always accessed from a different actor context using `async`, so this is also
     // implicitly `async`.
-    func start(scenario: AdoptionScenario) async {}
+    func run(scenario: AdoptionScenario) async -> ContextOutput { .init() }
 }
 
 class ContentViewModelImpl: ContentViewModel {
 
-    func start(scenario: AdoptionScenario) async {
+    func run(scenario: AdoptionScenario) async -> ContextOutput {
         if scenario.isAsync {
-            await AdoptionContext(scenario: scenario).start()
+            await AdoptionContext(scenario: scenario).run()
         } else {
-            AdoptionContextNonAsync(scenario: scenario).start()
+            await AdoptionContextNonAsync(scenario: scenario).run()
         }
     }
 

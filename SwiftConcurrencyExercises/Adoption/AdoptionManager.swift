@@ -18,15 +18,16 @@ actor AdoptionManager {
         induceRandomDelay = true
     }
 
-    func submitAdoptionRequest(for cat: Cat) async {
+    func submitAdoptionRequest(for cat: Cat) async -> [ContextOutput.Stage] {
         print("AdoptionManager received submit adoption request for \(cat)")
         if induceRandomDelay {
             await Task.randomDelay()
         }
         adoptionRequestCounts[cat, default: 0] += 1
+        return [.managerReceivedSubmitRequest(cat: cat)]
     }
 
-    func removeAdoptionRequest(for cat: Cat) async {
+    func removeAdoptionRequest(for cat: Cat) async -> [ContextOutput.Stage] {
         print("AdoptionManager received remove adoption request for \(cat)")
         if induceRandomDelay {
             await Task.randomDelay()
@@ -35,6 +36,7 @@ actor AdoptionManager {
         if adoptionRequestCounts[cat] == 0 {
             adoptionRequestCounts[cat] = nil
         }
+        return [.managerReceivedRemoveRequest(cat: cat)]
     }
 
 }
@@ -45,14 +47,15 @@ class AdoptionManagerNonAsync {
 
     private let queue = DispatchQueue(label: "nz.liambyrne.AdoptionManagerNonAsyncQueue")
 
-    func submitAdoptionRequest(for cat: Cat) {
+    func submitAdoptionRequest(for cat: Cat) -> [ContextOutput.Stage] {
         print("AdoptionManagerNonAsync received submit adoption request for \(cat)")
         queue.sync {
             adoptionRequestCounts[cat, default: 0] += 1
         }
+        return [.managerReceivedSubmitRequest(cat: cat)]
     }
 
-    func removeAdoptionRequest(for cat: Cat) {
+    func removeAdoptionRequest(for cat: Cat) -> [ContextOutput.Stage] {
         print("AdoptionManagerNonAsync received remove adoption request for \(cat)")
         queue.sync {
             adoptionRequestCounts[cat]? -= 1
@@ -60,6 +63,7 @@ class AdoptionManagerNonAsync {
                 adoptionRequestCounts[cat] = nil
             }
         }
+        return [.managerReceivedRemoveRequest(cat: cat)]
     }
 
 }
