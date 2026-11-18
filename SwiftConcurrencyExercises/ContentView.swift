@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    let viewModel: ContentViewModel
+    let viewModel: ScenarioRunner
 
     var body: some View {
         VStack(spacing: 32) {
@@ -30,6 +30,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView(
-        viewModel: ContentViewModelMock()
+        viewModel: ScenarioRunnerMock()
     )
 }

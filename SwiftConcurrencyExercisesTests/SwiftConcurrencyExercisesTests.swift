@@ -12,7 +12,7 @@ import Testing
 struct SwiftConcurrencyExercisesTests {
 
     @Test func scenarioA() async {
-        let output = await ContentViewModelImpl().run(scenario: .scenarioA)
+        let output = await ScenarioRunnerImpl().run(scenario: .scenarioA)
 
         let stages = await output.stages
         #expect(stages.contains(where: { $0 == .outletOpened(identifier: .wellington) }))
@@ -39,7 +39,7 @@ struct SwiftConcurrencyExercisesTests {
     }
 
     @Test func scenarioB() async {
-        let output = await ContentViewModelImpl().run(scenario: .scenarioB)
+        let output = await ScenarioRunnerImpl().run(scenario: .scenarioB)
 
         let stages = await output.stages
         #expect(stages.contains(where: { $0 == .outletOpened(identifier: .wellington) }))
@@ -55,7 +55,7 @@ struct SwiftConcurrencyExercisesTests {
     }
 
     @Test(.disabled()) func scenarioC() async {
-        let output = await ContentViewModelImpl().run(scenario: .scenarioC)
+        let output = await ScenarioRunnerImpl().run(scenario: .scenarioC)
 
         let stages = await output.stages
         #expect(stages.contains(where: { $0 == .outletOpened(identifier: .wellington) }))

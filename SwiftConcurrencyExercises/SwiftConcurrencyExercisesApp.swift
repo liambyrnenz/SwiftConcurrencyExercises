@@ -12,7 +12,7 @@ struct SwiftConcurrencyExercisesApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(
-                viewModel: ContentViewModelImpl()
+                viewModel: ScenarioRunnerImpl()
             )
         }
     }

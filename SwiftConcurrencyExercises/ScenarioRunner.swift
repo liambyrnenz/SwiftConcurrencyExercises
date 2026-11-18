@@ -1,18 +1,16 @@
 //
-//  ContentViewModel.swift
+//  ScenarioRunner.swift
 //  SwiftConcurrencyExercises
 //
 //  Created by Liam on 18/09/2024.
 //
 
-// MARK: - ContentViewModel
-
 @MainActor
-protocol ContentViewModel {
+protocol ScenarioRunner {
     func run(scenario: AdoptionScenario) async -> ContextOutput
 }
 
-struct ContentViewModelMock: ContentViewModel {
+struct ScenarioRunnerMock: ScenarioRunner {
     // Because this definition isn't making the compiler angry, it's assumed that its current form satisfies the
     // protocol requirements.
     //
@@ -22,7 +20,7 @@ struct ContentViewModelMock: ContentViewModel {
     func run(scenario: AdoptionScenario) async -> ContextOutput { .init() }
 }
 
-class ContentViewModelImpl: ContentViewModel {
+class ScenarioRunnerImpl: ScenarioRunner {
 
     func run(scenario: AdoptionScenario) async -> ContextOutput {
         if scenario.isAsync {
