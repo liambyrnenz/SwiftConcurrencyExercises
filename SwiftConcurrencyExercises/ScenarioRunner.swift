@@ -26,7 +26,7 @@ class ScenarioRunnerImpl: ScenarioRunner {
         if scenario.isAsync {
             await AdoptionContext(scenario: scenario).run()
         } else {
-            await AdoptionContextNonAsync(scenario: scenario).run()
+            AdoptionContextNonAsync(scenario: scenario).run()
         }
     }
 

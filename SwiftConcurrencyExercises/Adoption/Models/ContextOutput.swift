@@ -5,7 +5,9 @@
 //  Created by Liam on 17/11/2026.
 //
 
-actor ContextOutput {
+import Synchronization
+
+final class ContextOutput: Sendable {
     enum Stage: Equatable {
         case outletOpened(identifier: AdoptionOutlet.Identifier)
         case managerReceivedSubmitRequest(cat: Cat)
@@ -16,9 +18,15 @@ actor ContextOutput {
         case removeAdoptionRequestEnd(cat: Cat, identifier: AdoptionOutlet.Identifier)
     }
 
-    private(set) var stages: [Stage] = []
+    private let stages = Mutex<[Stage]>([])
+
+    var stagesToRead: [Stage] {
+        stages.withLock { $0 }
+    }
 
     func add(stages: [Stage]) {
-        self.stages.append(contentsOf: stages)
+        self.stages.withLock {
+            $0.append(contentsOf: stages)
+        }
     }
 }

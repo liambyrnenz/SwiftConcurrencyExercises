@@ -63,10 +63,10 @@ struct AdoptionContext: Sendable {
         // do not.
         await withDiscardingTaskGroup { group in
             group.addTask { @Sendable in
-                await output.add(stages: await self.wellington.open())
+                output.add(stages: await self.wellington.open())
             }
             group.addTask { @Sendable in
-                await output.add(stages: await self.lowerHutt.open())
+                output.add(stages: await self.lowerHutt.open())
             }
         }
         print("All outlets opened\n")
@@ -95,14 +95,14 @@ struct AdoptionContext: Sendable {
         // to be aware when all tasks have been completed and run code after (e.g. a confirmation log.)
         await withDiscardingTaskGroup { group in
             group.addTask { @Sendable in
-                await output.add(stages: await self.wellington.submitAdoptionRequest(forCatWithID: 0))
-                await output.add(stages: await self.wellington.submitAdoptionRequest(forCatWithID: 1))
-                await output.add(stages: await self.wellington.removeAdoptionRequest(forCatWithID: 0))
+                output.add(stages: await self.wellington.submitAdoptionRequest(forCatWithID: 0))
+                output.add(stages: await self.wellington.submitAdoptionRequest(forCatWithID: 1))
+                output.add(stages: await self.wellington.removeAdoptionRequest(forCatWithID: 0))
             }
 
             group.addTask { @Sendable in
-                await output.add(stages: await self.lowerHutt.submitAdoptionRequest(forCatWithID: 3))
-                await output.add(stages: await self.lowerHutt.submitAdoptionRequest(forCatWithID: 4))
+                output.add(stages: await self.lowerHutt.submitAdoptionRequest(forCatWithID: 3))
+                output.add(stages: await self.lowerHutt.submitAdoptionRequest(forCatWithID: 4))
             }
         }
         await print(adoptionManager.adoptionRequestCounts)
@@ -121,11 +121,11 @@ struct AdoptionContext: Sendable {
         await adoptionManager.setInduceRandomDelay()
         await withDiscardingTaskGroup { group in
             group.addTask { @Sendable in
-                await output.add(stages: await self.wellington.submitAdoptionRequest(forCatWithID: 0))
+                output.add(stages: await self.wellington.submitAdoptionRequest(forCatWithID: 0))
             }
 
             group.addTask { @Sendable in
-                await output.add(stages: await self.lowerHutt.submitAdoptionRequest(forCatWithID: 3))
+                output.add(stages: await self.lowerHutt.submitAdoptionRequest(forCatWithID: 3))
             }
         }
         await print(adoptionManager.adoptionRequestCounts)
